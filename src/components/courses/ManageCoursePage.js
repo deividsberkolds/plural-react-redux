@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import * as courseActions from "../../redux/actions/courseActions";
-import * as authorActions from "../../redux/actions/authorActions";
+import { loadCourses, saveCourse } from "../../redux/actions/courseActions";
+import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
@@ -23,13 +23,16 @@ function ManageCoursePage({
       loadCourses().catch(error => {
         alert("Loading courses failed" + error);
       });
+    } else {
+      setCourse({ ...props.course });
     }
+
     if (authors.length === 0) {
       loadAuthors().catch(error => {
         alert("Loading authors failed" + error);
       });
     }
-  }, []);
+  }, [props.course]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -85,8 +88,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  loadCourses: courseActions.loadCourses,
-  loadAuthors: authorActions.loadAuthors,
-  saveCourse: courseActions.saveCourse
+  loadCourses,
+  loadAuthors,
+  saveCourse
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManageCoursePage);
