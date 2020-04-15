@@ -7,12 +7,7 @@ import "./index.css";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 
-const store = configureStore({
-  courses: [
-    { key: 1, title: "test" },
-    { key: 2, title: "test1" }
-  ]
-});
+const store = configureStore();
 
 render(
   <ReduxProvider store={store}>
