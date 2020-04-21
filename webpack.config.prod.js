@@ -24,8 +24,8 @@ module.exports = {
             filename: '[name].[contenthash].css',
         }),
         new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.API_URL': JSON.stringify('http://localhost:3001'),
-            'process.env.NODE_ENV': JSON.stringify('http://localhost:3001'),
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
